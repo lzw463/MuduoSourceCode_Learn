@@ -1,0 +1,12 @@
+[
+{
+  "directory": "/home/hfut/MuduoSourceCode_Learn/build",
+  "command": "/usr/bin/g++  -Dmymuduo_EXPORTS   -g -std=c++11 -g -fPIC   -o CMakeFiles/mymuduo.dir/Logger.cpp.o -c /home/hfut/MuduoSourceCode_Learn/Logger.cpp",
+  "file": "/home/hfut/MuduoSourceCode_Learn/Logger.cpp"
+},
+{
+  "directory": "/home/hfut/MuduoSourceCode_Learn/build",
+  "command": "/usr/bin/g++  -Dmymuduo_EXPORTS   -g -std=c++11 -g -fPIC   -o CMakeFiles/mymuduo.dir/Timestamp.cpp.o -c /home/hfut/MuduoSourceCode_Learn/Timestamp.cpp",
+  "file": "/home/hfut/MuduoSourceCode_Learn/Timestamp.cpp"
+}
+]
