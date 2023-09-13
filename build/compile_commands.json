@@ -1,6 +1,16 @@
 [
 {
   "directory": "/home/hfut/MuduoSourceCode_Learn/build",
+  "command": "/usr/bin/g++  -Dmymuduo_EXPORTS   -g -std=c++11 -g -fPIC   -o CMakeFiles/mymuduo.dir/Channel.cpp.o -c /home/hfut/MuduoSourceCode_Learn/Channel.cpp",
+  "file": "/home/hfut/MuduoSourceCode_Learn/Channel.cpp"
+},
+{
+  "directory": "/home/hfut/MuduoSourceCode_Learn/build",
+  "command": "/usr/bin/g++  -Dmymuduo_EXPORTS   -g -std=c++11 -g -fPIC   -o CMakeFiles/mymuduo.dir/EventLoop.cpp.o -c /home/hfut/MuduoSourceCode_Learn/EventLoop.cpp",
+  "file": "/home/hfut/MuduoSourceCode_Learn/EventLoop.cpp"
+},
+{
+  "directory": "/home/hfut/MuduoSourceCode_Learn/build",
   "command": "/usr/bin/g++  -Dmymuduo_EXPORTS   -g -std=c++11 -g -fPIC   -o CMakeFiles/mymuduo.dir/InetAddress.cpp.o -c /home/hfut/MuduoSourceCode_Learn/InetAddress.cpp",
   "file": "/home/hfut/MuduoSourceCode_Learn/InetAddress.cpp"
 },
@@ -8,6 +18,11 @@
   "directory": "/home/hfut/MuduoSourceCode_Learn/build",
   "command": "/usr/bin/g++  -Dmymuduo_EXPORTS   -g -std=c++11 -g -fPIC   -o CMakeFiles/mymuduo.dir/Logger.cpp.o -c /home/hfut/MuduoSourceCode_Learn/Logger.cpp",
   "file": "/home/hfut/MuduoSourceCode_Learn/Logger.cpp"
+},
+{
+  "directory": "/home/hfut/MuduoSourceCode_Learn/build",
+  "command": "/usr/bin/g++  -Dmymuduo_EXPORTS   -g -std=c++11 -g -fPIC   -o CMakeFiles/mymuduo.dir/TcpServer.cpp.o -c /home/hfut/MuduoSourceCode_Learn/TcpServer.cpp",
+  "file": "/home/hfut/MuduoSourceCode_Learn/TcpServer.cpp"
 },
 {
   "directory": "/home/hfut/MuduoSourceCode_Learn/build",

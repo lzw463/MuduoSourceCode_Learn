@@ -32,10 +32,10 @@ uint16_t InetAddress::toPort() const
 
 
 
-#include <iostream>
-int main()
-{
-    InetAddress addr(8000);
-    std::cout << addr.toPort() << std::endl;
-    return 0;
-}
+// #include <iostream>
+// int main()
+// {
+//     InetAddress addr(8000);
+//     std::cout << addr.toPort() << std::endl;
+//     return 0;
+// }
