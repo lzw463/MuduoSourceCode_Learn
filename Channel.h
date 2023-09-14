@@ -80,7 +80,7 @@ private:
     EventCallback errorCallback_;
 
     void update();
-    void hanleEventWithGuard(Timestamp* reveiveTime);
+    void handleEventWithGuard(Timestamp reveiveTime);
 };
 
 
