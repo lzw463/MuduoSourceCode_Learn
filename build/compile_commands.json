@@ -21,6 +21,11 @@
 },
 {
   "directory": "/home/hfut/MuduoSourceCode_Learn/build",
+  "command": "/usr/bin/g++  -Dmymuduo_EXPORTS   -g -std=c++11 -g -fPIC   -o CMakeFiles/mymuduo.dir/Poller.cpp.o -c /home/hfut/MuduoSourceCode_Learn/Poller.cpp",
+  "file": "/home/hfut/MuduoSourceCode_Learn/Poller.cpp"
+},
+{
+  "directory": "/home/hfut/MuduoSourceCode_Learn/build",
   "command": "/usr/bin/g++  -Dmymuduo_EXPORTS   -g -std=c++11 -g -fPIC   -o CMakeFiles/mymuduo.dir/TcpServer.cpp.o -c /home/hfut/MuduoSourceCode_Learn/TcpServer.cpp",
   "file": "/home/hfut/MuduoSourceCode_Learn/TcpServer.cpp"
 },

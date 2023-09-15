@@ -3,6 +3,7 @@ file(REMOVE_RECURSE
   "CMakeFiles/mymuduo.dir/EventLoop.cpp.o"
   "CMakeFiles/mymuduo.dir/InetAddress.cpp.o"
   "CMakeFiles/mymuduo.dir/Logger.cpp.o"
+  "CMakeFiles/mymuduo.dir/Poller.cpp.o"
   "CMakeFiles/mymuduo.dir/TcpServer.cpp.o"
   "CMakeFiles/mymuduo.dir/Timestamp.cpp.o"
   "../lib/libmymuduo.pdb"
