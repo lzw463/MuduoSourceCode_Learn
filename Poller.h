@@ -5,6 +5,7 @@
 #include "Timestamp.h"
 #include "Eventloop.h"
 
+
 #include <vector>
 #include <unordered_map>
 
@@ -29,9 +30,10 @@ public:
     bool hasChannel(Channel *channel) const;
 
     //Eventloop可以通过该接口获取默认的IO复用的具体实现
+    //势必要包含epollpoller，所以不在poller.cpp中实现
     static Poller* newDefaultPoller(EventLoop* loop);
 protected:
-    //
+    //map的key socketfd，value所属的channel通道类型
     using ChannelMap = std::unordered_map<int, Channel*>;
     ChannelMap channels_; //能被派生类成员访问
 
