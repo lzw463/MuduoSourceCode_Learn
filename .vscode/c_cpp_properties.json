@@ -4,6 +4,7 @@
             "name": "Linux",
             "includePath": [
                 "${workspaceFolder}/**"
+                "/home/hfut/MuduoSourceCode_Learn/**"
             ],
             "defines": [],
             "compilerPath": "/usr/bin/gcc",
