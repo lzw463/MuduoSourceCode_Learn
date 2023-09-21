@@ -28,10 +28,10 @@ public:
     
     //设置回调函数对象
     //cb是一个左值，有名字有内存，出了函数之后，这个形参的局部对象就不需要了，用move将左值变为右值，资源直接给readcallback
-    void setReadCallback(ReadEventCallback &cb) {readCallback_ = std::move(cb);} 
-    void setWriteCallback(EventCallback &cb) {writeCallback_ = std::move(cb);}
-    void setCloseCallback(EventCallback &cb) {closeCallback_ = std::move(cb);}
-    void setErrorCallback(EventCallback &cb) {errorCallback_ = std::move(cb);}
+    void setReadCallback(const ReadEventCallback &cb) {readCallback_ = std::move(cb);} 
+    void setWriteCallback(const EventCallback &cb) {writeCallback_ = std::move(cb);}
+    void setCloseCallback(const EventCallback &cb) {closeCallback_ = std::move(cb);}
+    void setErrorCallback(const EventCallback &cb) {errorCallback_ = std::move(cb);}
 
     //防止channel被remove掉，channel还在执行回调操作
     //？？？？？？？？？？

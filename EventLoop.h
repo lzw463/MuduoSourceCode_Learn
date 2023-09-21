@@ -3,10 +3,10 @@
 #include <functional>
 #include <vector>
 #include <atomic>
-#include <Timestamp.h>
 #include <memory>
 #include <mutex>
 
+#include "Timestamp.h"
 #include "noncopyable.h"
 #include "CurrentThread.h"
 
@@ -42,7 +42,7 @@ public:
     void removeChannel(Channel *channel);
     bool hasChannel(Channel *channel);
 
-    bool idInLoopTheread() const { return threadId_ == CurrentThread::tid(); }
+    bool isInLoopTheread() const { return threadId_ == CurrentThread::tid(); }
 
 private:
     void handleRead();
@@ -60,7 +60,6 @@ private:
     std::unique_ptr<Channel> wakeupChannel_;
 
     ChannelList activeChannels_;
-    Channel *currentActiveChannel_;
 
     std::atomic_bool callingPendingFunctors_; //标示当前loop是否有需要执行的回调操作
     std::vector<Functor> pendingFunctors_; //存储loop需要执行的所有回调操作

@@ -3,7 +3,7 @@
 
 #include "noncopyable.h"
 #include "Timestamp.h"
-#include "Eventloop.h"
+#include "EventLoop.h"
 
 
 #include <vector>
@@ -38,7 +38,7 @@ protected:
     ChannelMap channels_; //能被派生类成员访问
 
 private:
-    EventLoop *ownerloop; //定义poller所属的事件循环eventloop
+    EventLoop *ownerloop_; //定义poller所属的事件循环eventloop
      
 
 };

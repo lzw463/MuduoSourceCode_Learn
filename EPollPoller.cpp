@@ -3,7 +3,9 @@
 #include "Channel.h"
 #include "Timestamp.h"
 
+#include <unistd.h>
 #include <errno.h>
+#include <string.h>
 
 //channel未添加到poller中
 const int kNew = -1; //channel成员函数index = -1 
@@ -21,24 +23,24 @@ const int kDeleted = 2;
 
 */
 
-EPolllPoller::EPollPoller(EventLoop *loop)
+EPollPoller::EPollPoller(EventLoop *loop)
     : Poller(loop)
     , epollfd_(::epoll_create1(EPOLL_CLOEXEC)) //epoll_create
-    , event_(kInitEventListSize)
+    , events_(kInitEventListSize)
 {
     if (epollfd_ < 0)
     {
-        LOG_FATAL("epoll_create error:%d \n", errno)
+        LOG_FATAL("epoll_create error:%d \n", errno);
     }
 }
 
-EPolllPoller::~EPolllPoller()
+EPollPoller::~EPollPoller()
 {
     ::close(epollfd_);
 }
 
 //
-void EPolllPoller::updateChannel(Channel *channel)
+void EPollPoller::updateChannel(Channel *channel)
 {
     const int index = channel->index();
     LOG_INFO("func = %s => fd=%d events=%d index=%d \n",__FUNCTION__, channel->fd(), channel->events(), index);
@@ -48,7 +50,7 @@ void EPolllPoller::updateChannel(Channel *channel)
         if (index == kNew)
         {
             int fd = channel->fd();
-            channel_[fd] = channel;
+            channels_[fd] = channel;
         }
         channel->set_index(kAdded);
         update(EPOLL_CTL_ADD, channel);
@@ -56,10 +58,10 @@ void EPolllPoller::updateChannel(Channel *channel)
     else  //channel已经在poller上注册过了
     {
         int fd = channel->fd();
-        if (channel->isNonEvent())
+        if (channel->isNoneEvent())
         {
             update(EPOLL_CTL_DEL, channel);
-            Channel->set_index(kDeleted);
+            channel->set_index(kDeleted);
         }
         else
         {
@@ -67,7 +69,7 @@ void EPolllPoller::updateChannel(Channel *channel)
         }
     }
 }
-void EPolllPoller::removeChannel(Channel *channel)
+void EPollPoller::removeChannel(Channel *channel)
 {
     int fd = channel->fd();
     channels_.erase(fd);
@@ -82,19 +84,19 @@ void EPolllPoller::removeChannel(Channel *channel)
 
 }
 
-void EPolllPoller::fillActivateChannels(int numEvents, ChannelList *activateChannelLists) const
+void EPollPoller::fillActivateChannels(int numEvents, ChannelList *activeChannelLists) const
 {
     for (int i = 0; i < numEvents; ++i)
     {
         Channel *channel = static_cast<Channel*>(events_[i].data.ptr);
         channel->set_revents(events_[i].events);
-        activeChannels->push_back(channel); //EventLoop就拿到poller给他返回的所有发生事件的channel
+        activeChannelLists->push_back(channel); //EventLoop就拿到poller给他返回的所有发生事件的channel
     }
 
 }
 
 //更新channel通道，epoll_ctl add/del/mod
-void EPolllPoller::update(int operation, Channel *channel)
+void EPollPoller::update(int operation, Channel *channel)
 {
     epoll_event event;
     memset(&event, 0, sizeof event);
@@ -102,7 +104,6 @@ void EPolllPoller::update(int operation, Channel *channel)
     event.events = channel->events();
     event.data.fd = fd;
     event.data.ptr = channel;
-    int fd = channel->fd();
 
     if (::epoll_ctl(epollfd_, operation, fd, &event) < 0)
     {
@@ -117,12 +118,12 @@ void EPolllPoller::update(int operation, Channel *channel)
     }
 }
 
-Timestamp EPolllPoller::poll(int timeoutMS, ChannelList *activeChannels)
+Timestamp EPollPoller::poll(int timeoutMS, ChannelList *activeChannels)
 {
     //poll调用非常频繁，loginfo每次都会打印，影响效率，所以应设置为logdebug
-    LOG_INFO("func=%s => fd total count:%d\n", channels_.size());
+    LOG_INFO("func=%s => fd total count:%lu\n", __FUNCTION__, channels_.size());
     
-    int numEvents = ::epoll_wait(epollfd_, *events_.begin(), static_cast<int>events_.size(), tomeoutMS);
+    int numEvents = ::epoll_wait(epollfd_, &*events_.begin(), static_cast<int>(events_.size()), timeoutMS);
     int savedErrno = errno;
     Timestamp now(Timestamp::now());
 
@@ -132,7 +133,7 @@ Timestamp EPolllPoller::poll(int timeoutMS, ChannelList *activeChannels)
         fillActivateChannels(numEvents, activeChannels);
         if (numEvents == events_.size())
         {
-            events_.resize(events_.size() * 2));
+            events_.resize(events_.size() * 2);
         }
     }
     else if (numEvents == 0)

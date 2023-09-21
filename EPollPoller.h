@@ -15,11 +15,11 @@ epoll_ctl add/mod/del
 epoll_wait
 */
 
-class EPolllPoller : public Poller
+class EPollPoller : public Poller
 {
 public:
-    EPolllPoller(EventLoop *loop);
-    ~EPolllPoller() override;
+    EPollPoller(EventLoop *loop);
+    ~EPollPoller() override;
     
     //重写基类Poller的抽象方法
     Timestamp poll(int timeoutMS, ChannelList *activateChannels) override;
@@ -27,7 +27,7 @@ public:
     void removeChannel(Channel *channel) override;
 
 private:
-    static const int kIninEventListSize = 16;
+    static const int kInitEventListSize = 16;
 
     //填写活跃的连接
     void fillActivateChannels(int numEvents, ChannelList *activateChannelLists) const;
