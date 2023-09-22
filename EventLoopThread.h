@@ -6,7 +6,7 @@
 #include <functional>
 #include <mutex>
 #include <condition_variable>
-#include <string.h>
+#include <string>
 
 class EventLoop;
 
@@ -30,5 +30,4 @@ private:
     std::mutex mutex_;
     std::condition_variable cond_;
     ThreadInitCallback callback_;
-
 };
