@@ -6,6 +6,7 @@
 #include <sys/types.h>
 #include <sys/socket.h>
 #include <strings.h>
+#include <netinet/tcp.h>
 
 Socket::~Socket()
 {
@@ -57,15 +58,15 @@ void Socket::setTcpNoDelay(bool on)
 void Socket::setReuseAddr(bool on)
 {
     int optval = on ? 1 : 0;
-    ::setsockopt(sockfd_, SQL_SOCKET, SO_REUSEADDR, &optval, sizeof optval);
+    ::setsockopt(sockfd_, SOL_SOCKET, SO_REUSEADDR, &optval, sizeof optval);
 }
 void Socket::setReusePort(bool on)
 {
     int optval = on ? 1 : 0;
-    ::setsockopt(sockfd_, SQL_SOCKET, SO_REUSEADDR, &optval, sizeof optval);
+    ::setsockopt(sockfd_, SOL_SOCKET, SO_REUSEADDR, &optval, sizeof optval);
 }
 void Socket::setKeepAlive(bool on)
 {
     int optval = on ? 1 : 0;
-    ::setsockopt(sockfd_, SQL_SOCKET, SO_KEEPALIVE, &optval, sizeof optval);
+    ::setsockopt(sockfd_, SOL_SOCKET, SO_KEEPALIVE, &optval, sizeof optval);
 }
