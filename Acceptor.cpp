@@ -38,7 +38,7 @@ Acceptor::~Acceptor()
 void Acceptor::listen()
 {
     listenning_ = true;
-    acceptSocket_.listen(); //listen
+    acceptSocket_.listen(); //listenhandleEvent
     acceptChannel_.enableReading(); //acceptchannel => poller
 }
 
