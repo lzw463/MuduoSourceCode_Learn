@@ -86,6 +86,7 @@ void EventLoop::loop()
     while (!quit_)
     {
         activeChannels_.clear();
+        //poll监听两类fd，一种是clientfd，一种是wakeupfd
         pollReturnTime_ = poller_->poll(kPollTimeMs, &activeChannels_);
         for (Channel *channel : activeChannels_)
         {
@@ -98,8 +99,8 @@ void EventLoop::loop()
         唤醒之后channel里面现在只有一个wakeupfd
         mainloop事先注册一个回调cb（需要subloop来执行）  wakeup subloop之后，执行下面的方法，执行之前mainloop注册的回调
         */
+        //回调工作的内容：比如说把mainloop给你的channel往subloop上去注册，由这些回调去驱动
         doPendingFunctors();
-        
     }
 
     LOG_INFO("EventLoop %p stop looping. \n", this);
@@ -140,7 +141,8 @@ void EventLoop::queueInLoop(Functor cb)
     }
 
     //唤醒相应的，需要执行上面回调操作的loop线程
-    //calling:当前loop正在执行回调，但是loop又有了新的回调
+    //calling:当前上一轮loop正在执行回调，但是loop又有了新的回调
+    //如果不加以处理，在上一轮dopendingfunctors()结束之后，阻塞在pool无法执行新的回调
     if(!isInLoopTheread() || callingPendingFunctors_)
     {
         wakeup();
@@ -177,10 +179,10 @@ bool EventLoop::hasChannel(Channel *channel)
 void EventLoop::doPendingFunctors()
 {
     std::vector<Functor> functors;
-    callingPendingFunctors_ = true;
+    callingPendingFunctors_ = true; //当前这个loop在执行回调
     {
         std::unique_lock<std::mutex> lock(mutex_);
-        functors.swap(pendingFunctors_);
+        functors.swap(pendingFunctors_); //通过临时对象，不妨碍mainloop向subloop下发channel
     
     }
 
