@@ -47,8 +47,11 @@ public:
     void setMessageCallback_(const MessageCallback& cb)
     { messageCallback_ = cb; }
 
-    void setWriteCompleteCallback(const HighWaterMarkCallback &cb, size_t highWaterMark)
+    void setHighWaterMarkCallback(const HighWaterMarkCallback &cb, size_t highWaterMark)
     { highWaterMarkCallback_ = cb; highWaterMark_ = highWaterMark;}
+
+    void setWriteCompleteCallback(const WriteCompleteCallback& cb)
+    {writeCompleteCallback_ = cb;}
     
     void setCloseCallback(const CloseCallback& cb)
     { closeCallback_ = cb; }

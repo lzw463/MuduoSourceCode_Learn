@@ -201,7 +201,7 @@ void TcpConnection::shutdown()
 
 void TcpConnection::shutdownInLoop()
 {
-    if (channel_->isWriting()) //说明outputBuffer已经全部发送完成
+    if (!channel_->isWriting()) //说明outputBuffer已经全部发送完成
     {
         socket_->shutdownWrite(); //关闭写端EPOLLHUP
     }
@@ -243,6 +243,7 @@ void TcpConnection::handleWrite()
         }
     }
 }
+
 void TcpConnection::handleClose()
 {
     LOG_INFO("fd=%d state=%d \n", channel_->fd(), (int)state_);
