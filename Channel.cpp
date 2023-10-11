@@ -25,7 +25,8 @@ Channel::~Channel()
 
 }
 
-//channel的tie方法什么时候调用过？？？
+//channel的tie方法什么时候调用过？？？ 一个新连接创建的时候，一个channel有一个弱智能指针只想tcpconnection
+//Tcpconnection底层绑定了一个channel channel需要感知Tcpconnection的存活
 void Channel::tie(const std::shared_ptr<void> &obj)
 {
     tie_ = obj;
@@ -38,7 +39,7 @@ void Channel::update()
 {
     //通过channel所属的eventloop，调用poller的相应方法，注册fd的events事件
     //add code
-    //loop_->updateChannel(this);
+    loop_->updateChannel(this);
 
 }
 
@@ -46,7 +47,7 @@ void Channel::update()
 void Channel::remove()
 {
     //add code
-    //loop_->removeChannel(this);
+    loop_->removeChannel(this);
 }
 
 void Channel::handleEvent(Timestamp receiveTime)
