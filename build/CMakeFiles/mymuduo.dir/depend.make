@@ -84,8 +84,19 @@ CMakeFiles/mymuduo.dir/Socket.cpp.o: ../Socket.cpp
 CMakeFiles/mymuduo.dir/Socket.cpp.o: ../Socket.h
 CMakeFiles/mymuduo.dir/Socket.cpp.o: ../noncopyable.h
 
+CMakeFiles/mymuduo.dir/TcpServer.cpp.o: ../Acceptor.h
+CMakeFiles/mymuduo.dir/TcpServer.cpp.o: ../Buffer.h
+CMakeFiles/mymuduo.dir/TcpServer.cpp.o: ../Callbacks.h
+CMakeFiles/mymuduo.dir/TcpServer.cpp.o: ../Channel.h
+CMakeFiles/mymuduo.dir/TcpServer.cpp.o: ../EventLoopThreadPool.h
+CMakeFiles/mymuduo.dir/TcpServer.cpp.o: ../InetAddress.h
+CMakeFiles/mymuduo.dir/TcpServer.cpp.o: ../Logger.h
+CMakeFiles/mymuduo.dir/TcpServer.cpp.o: ../Socket.h
+CMakeFiles/mymuduo.dir/TcpServer.cpp.o: ../TcpConnection.h
 CMakeFiles/mymuduo.dir/TcpServer.cpp.o: ../TcpServer.cpp
 CMakeFiles/mymuduo.dir/TcpServer.cpp.o: ../TcpServer.h
+CMakeFiles/mymuduo.dir/TcpServer.cpp.o: ../Timestamp.h
+CMakeFiles/mymuduo.dir/TcpServer.cpp.o: ../noncopyable.h
 
 CMakeFiles/mymuduo.dir/Thread.cpp.o: ../CurrentThread.h
 CMakeFiles/mymuduo.dir/Thread.cpp.o: ../Thread.cpp
