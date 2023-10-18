@@ -17,13 +17,13 @@ static int createNonblocking()
 
 Acceptor::Acceptor(EventLoop *loop, const InetAddress &listenAddr, bool reuseport)
     : loop_(loop)
-    , acceptSocket_(createNonblocking())
+    , acceptSocket_(createNonblocking()) //socket
     , acceptChannel_(loop, acceptSocket_.fd())
     , listenning_(false)
 {
     acceptSocket_.setReuseAddr(true);
     acceptSocket_.setReusePort(true);
-    acceptSocket_.bindAddress(listenAddr);
+    acceptSocket_.bindAddress(listenAddr); //bind
     // TcpServer::start() Acceptor.listen 有新用户的连接connfd>channel>subloop
     acceptChannel_.setReadCallback(std::bind(&Acceptor::handleRead, this));
 }

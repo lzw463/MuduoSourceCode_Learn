@@ -40,7 +40,6 @@ EventLoop* EventLoopThread::startLoop()
         loop = loop_;
     }
     return loop; //新线程的loop返回给主线程
-
 }
 
 //下面这个方法是在单独的新线程里运行的
